@@ -9,33 +9,35 @@ import normalize from "react-native-normalize";
 
 interface Styles {
   container: ViewStyle;
-  text: TextStyle;
+  footerCtn: ViewStyle;
   image: ImageStyle;
   imgContainer: ViewStyle;
-  footerCtn: ViewStyle;
+  text: TextStyle;
 }
-const { width, fontScale } = Dimensions.get("window");
+const { height, fontScale } = Dimensions.get("window");
+
 export const styles = StyleSheet.create<Styles>({
   container: {
-    paddingVertical: normalize(5),
     alignItems: "center",
-    width: width / 2,
+    flex: 1,
+    marginVertical: normalize(10),
   },
   text: {
-    fontSize: 23 * fontScale,
+    flex: 1,
+    fontSize: 25 * fontScale,
   },
   image: {
-    height: 150,
-    width: 150,
+    height: height / 5,
+    width: height / 5,
   },
   imgContainer: {
     borderRadius: normalize(15),
+    marginBottom: normalize(10),
     overflow: "hidden",
   },
   footerCtn: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "75%",
-    paddingHorizontal: normalize(5),
+    paddingHorizontal: normalize(20),
   },
 });

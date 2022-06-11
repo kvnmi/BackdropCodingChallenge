@@ -1,16 +1,21 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import HomeScreen from "./App/Screens/Home";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import AppNavigator from "./App/Router/AppNavigator";
+import NavigationTheme from "./App/Router/Theme";
+import { useFonts } from "expo-font";
 
 export default function App() {
-  return <HomeScreen />;
-}
+  const [loaded] = useFonts({
+    SFProRegular: require("./assets/fonts/SourceSerifPro-Regular.ttf"),
+    SFProBold: require("./assets/fonts/SourceSerifPro-SemiBold.ttf"),
+  });
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+  if (!loaded) {
+    return null;
+  }
+  return (
+    <NavigationContainer theme={NavigationTheme}>
+      <AppNavigator />
+    </NavigationContainer>
+  );
+}
