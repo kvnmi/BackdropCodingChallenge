@@ -8,20 +8,19 @@ import { colors } from "../../utils/colors";
 
 interface Props {
   onPress: () => void;
+  image: string;
+  name: string;
 }
 
-const FavouritesListItem: FC<Props> = ({ onPress }) => {
+const FavouritesListItem: FC<Props> = ({ onPress, image, name }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
-        <Image
-          source={require("../../../assets/cat.jpg")}
-          style={styles.image}
-        />
+        <Image source={{ uri: image }} style={styles.image} />
       </View>
       <View style={styles.footerCtn}>
         <AppText style={styles.text} type="regular">
-          Firstcat
+          {name}
         </AppText>
         <Pressable onPress={onPress}>
           <MaterialCommunityIcons

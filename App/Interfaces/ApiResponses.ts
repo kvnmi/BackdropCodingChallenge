@@ -24,3 +24,20 @@ export interface IPetBreeds {
     metric: string;
   };
 }
+
+interface IPostFavourite {
+  message: string;
+  id: number;
+}
+
+export interface IFavourites {
+  id: number;
+  user_id: string;
+  image_id: string;
+  sub_id: string;
+  created_at: Date;
+  image: {
+    id: string;
+    url: string;
+  };
+}

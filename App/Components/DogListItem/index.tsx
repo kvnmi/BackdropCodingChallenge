@@ -10,21 +10,26 @@ interface Props {
   image: string;
   name: string;
   onPress: () => void;
+  liked?: boolean;
 }
 
-const DogListItem: FC<Props> = ({ image, name, onPress }) => {
+const DogListItem: FC<Props> = ({ image, name, onPress, liked = false }) => {
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
         <Image source={{ uri: image }} style={styles.image} />
       </View>
-      <AppText style={styles.text} type="regular">
+      <AppText
+        style={styles.text}
+        type="regular"
+        onPress={() => console.log(status)}
+      >
         {name}
       </AppText>
       <MaterialCommunityIcons
-        name={"heart-outline"}
+        name={liked ? "heart" : "heart-outline"}
         size={normalize(25)}
-        color={colors.lightGrey}
+        color={liked ? colors.likeIcon : colors.lightGrey}
         onPress={onPress}
       />
     </View>

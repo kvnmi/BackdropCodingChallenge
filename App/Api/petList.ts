@@ -8,5 +8,5 @@ export interface IParams {
 }
 
 export function getPetListings(params: IParams): Promise<ApiResponse<any>> {
-  return apiClient.get("/search", params);
+  return apiClient.get("/images/search", params);
 }

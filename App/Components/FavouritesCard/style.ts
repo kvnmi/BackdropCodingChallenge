@@ -39,5 +39,6 @@ export const styles = StyleSheet.create<Styles>({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: normalize(20),
+    width: height / 4.5,
   },
 });

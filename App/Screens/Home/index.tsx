@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect, useState } from "react";
-import { FlatList, ActivityIndicator } from "react-native";
+import { FlatList, ActivityIndicator, Button } from "react-native";
 import AppText from "../../Components/AppText";
 import DogListItem from "../../Components/DogListItem";
 import Screen from "../../Components/Screen.tsx";
@@ -8,24 +8,47 @@ import { styles } from "./style";
 import { getPetListings, IParams } from "../../Api/petList";
 import { IPetListings } from "../../Interfaces/ApiResponses";
 import { colors } from "../../utils/colors";
+import { useApi } from "../../Hooks/useApi";
+import { addFavourite, IFavParam } from "../../Api/addFavourites";
+import { useAppSelector, useAppDispatch } from "../../Hooks/rtxhooks";
 
 const HomeScreen = () => {
   const [number, setNumber] = useState<number>(0);
-  const [loading, setLoading] = useState<boolean>(true);
   const [dogs, setDogs] = useState<IPetListings[]>([]);
+  const { loading, request } = useApi(getPetListings);
+  const { data } = useAppSelector((state) => state.favouritesReducer);
+  const { request: addNewFavourite, loading: favLoading } =
+    useApi(addFavourite);
+
+  const status: string[] = [];
+  data.forEach((i) => status.push(i.image_id));
+
   const param: IParams = {
     limit: 15,
     page: number,
     order: "ASC",
   };
+
   async function getListings() {
-    setLoading(true);
     console.log("Getting Dogs");
-    const response = await getPetListings(param);
+    const response = await request(param);
     if (!response.ok) return console.log(response.data.message);
     console.log("Got Dogs");
-    setLoading(false);
     return setDogs([...dogs, ...response.data]);
+  }
+
+  async function addToFavourites({ image_id, sub_id }: IFavParam) {
+    const data: IFavParam = {
+      image_id,
+      sub_id,
+    };
+
+    console.log("adding to fav", data);
+    const response = await addNewFavourite(data);
+    if (!response.data) return console.log(response.data.message);
+    console.log("added to fav");
+
+    console.log(response.data);
   }
 
   async function handeEnd() {
@@ -34,6 +57,9 @@ const HomeScreen = () => {
   }
 
   useEffect(() => {
+    console.log(status);
+    console.log(data);
+
     getListings();
   }, []);
   return (
@@ -48,7 +74,13 @@ const HomeScreen = () => {
           <DogListItem
             name={item.breeds[0].name}
             image={item.url}
-            onPress={() => console.log(item)}
+            onPress={() =>
+              addToFavourites({
+                image_id: item.id,
+                sub_id: "Tomiwa- ",
+              })
+            }
+            liked={status.includes(item.id)}
           />
         )}
         showsVerticalScrollIndicator={false}
@@ -60,6 +92,7 @@ const HomeScreen = () => {
           ) : null
         }
       />
+      <Button title="" onPress={() => console.log(data)} />
       <StatusBar style="auto" />
     </Screen>
   );
