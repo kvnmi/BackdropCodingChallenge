@@ -24,7 +24,7 @@
         "backgroundColor": "#FFFFFF"
       },
       "package": "com.tomiwa.BackdropCodingChallenge",
-      "version": 1
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
