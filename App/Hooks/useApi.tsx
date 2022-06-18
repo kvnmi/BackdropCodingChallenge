@@ -1,9 +1,8 @@
 import { ApiResponse } from "apisauce";
 import { useState } from "react";
-import { IParams } from "../Api/petList";
 
 export function useApi(
-  apiFunction: (...args: any[]) => Promise<ApiResponse<IParams, any>>
+  apiFunction: (...args: any[]) => Promise<ApiResponse<any, any>>
 ): {
   data: any;
   error: boolean;

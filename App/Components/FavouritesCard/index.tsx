@@ -1,15 +1,16 @@
 import React, { FC } from "react";
 import { Image, Pressable, View } from "react-native";
-import AppText from "../AppText";
-import { styles } from "./style";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import normalize from "react-native-normalize";
+
+import AppText from "../AppText";
 import { colors } from "../../utils/colors";
+import { styles } from "./style";
 
 interface Props {
-  onPress: () => void;
   image: string;
   name: string;
+  onPress: () => void;
 }
 
 const FavouritesListItem: FC<Props> = ({ onPress, image, name }) => {

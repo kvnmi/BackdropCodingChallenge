@@ -7,6 +7,7 @@ interface textProps {
   type: "regular" | "bold";
 }
 
+// Custom Text component for the application.
 const AppText: FC<textProps & TextProps> = ({
   children,
   type,

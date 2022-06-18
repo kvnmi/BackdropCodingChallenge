@@ -1,19 +1,27 @@
 import React, { FC } from "react";
 import { Image, View } from "react-native";
 import AppText from "../AppText";
-import { styles } from "./style";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import normalize from "react-native-normalize";
+
 import { colors } from "../../utils/colors";
+import { styles } from "./style";
 
 interface Props {
   image: string;
+  liked?: boolean;
+  status?: boolean;
   name: string;
   onPress: () => void;
-  liked?: boolean;
 }
 
-const DogListItem: FC<Props> = ({ image, name, onPress, liked = false }) => {
+const DogListItem: FC<Props> = ({
+  image,
+  name,
+  onPress,
+  liked = false,
+  status,
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imgContainer}>
@@ -27,9 +35,9 @@ const DogListItem: FC<Props> = ({ image, name, onPress, liked = false }) => {
         {name}
       </AppText>
       <MaterialCommunityIcons
-        name={liked ? "heart" : "heart-outline"}
+        name={liked || status ? "heart" : "heart-outline"}
         size={normalize(25)}
-        color={liked ? colors.likeIcon : colors.lightGrey}
+        color={liked || status ? colors.likeIcon : colors.lightGrey}
         onPress={onPress}
       />
     </View>

@@ -25,11 +25,6 @@ export interface IPetBreeds {
   };
 }
 
-interface IPostFavourite {
-  message: string;
-  id: number;
-}
-
 export interface IFavourites {
   id: number;
   user_id: string;

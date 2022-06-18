@@ -6,6 +6,7 @@ export interface IGetFavourite {
   page: number;
 }
 
+// Fetches a list of all the users favourites
 export async function getFavourites(
   param: IGetFavourite
 ): Promise<ApiResponse<any>> {

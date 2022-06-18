@@ -35,7 +35,7 @@ const favouritesSlice = createSlice({
   name: "favouritesSlice",
   reducers: {
     loadMore: () => {
-      console.log("I work");
+      console.log("I am going to load the favourites lazily");
     },
   },
   extraReducers(builder) {

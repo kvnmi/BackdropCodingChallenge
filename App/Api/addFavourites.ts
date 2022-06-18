@@ -6,6 +6,7 @@ export interface IFavParam {
   sub_id: string;
 }
 
+// Adds a new favourite dod item
 export function addFavourite(param: IFavParam): Promise<ApiResponse<any>> {
   return apiClient.post("/favourites", param);
 }
